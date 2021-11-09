@@ -71,12 +71,12 @@ jobs:
       run: |
         pwd
         ls -l
-        docker build nginx --tag ${{ env.REGISTRY }}/markushaslingerleocloud-nginx
+        docker build nginx --tag ${{ env.REGISTRY }}/markushaslinger/leocloud-nginx
       working-directory: distribution/${{ env.DISTRIBUTION_FOLDER }}
 
     - name: build appsrv docker image
       run: |
-        docker build --file appsrv/Dockerfile.jvm appsrv --tag ${{ env.REGISTRY }}/markushaslingerleocloud-appsrv
+        docker build --file appsrv/Dockerfile.jvm appsrv --tag ${{ env.REGISTRY }}/markushaslinger/leocloud-appsrv
       working-directory: distribution/${{ env.DISTRIBUTION_FOLDER }}        
 
     - name: Log in to the Container registry
@@ -88,11 +88,11 @@ jobs:
 
     - name: push appsrv docker image
       run: |
-        docker push ${{ env.REGISTRY }}/markushaslingerleocloud-appsrv
+        docker push ${{ env.REGISTRY }}/markushaslinger/leocloud-appsrv
       working-directory: distribution/${{ env.DISTRIBUTION_FOLDER }}        
     - name: push nginx docker image
       run: |
-        docker push ${{ env.REGISTRY }}/markushaslingerleocloud-nginx
+        docker push ${{ env.REGISTRY }}/markushaslinger/leocloud-nginx
       working-directory: distribution/${{ env.DISTRIBUTION_FOLDER }}        
 
     - name: install ssh key
@@ -104,7 +104,7 @@ jobs:
         alias: server
 
     - name: convert github repository name to lowercase
-      run: echo "IMAGE_REPOSITORY=$(echo markushaslingerleocloud | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+      run: echo "IMAGE_REPOSITORY=$(echo markushaslinger/leocloud | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
     - name: enable ssh login for debugging...
       uses: mxschmitt/action-tmate@v3
